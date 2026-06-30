@@ -42,9 +42,14 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  logger.info(`Divyanshi Studios API running on http://localhost:${PORT}`);
-  logger.info(`Allowed CORS origins: ${allowedOrigins.join(', ')}`);
-});
+// Vercel imports this file as a serverless function and calls the exported
+// app directly — it must NOT bind a port there. Only listen when run as a
+// normal long-running process (local dev, Render, etc.).
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    logger.info(`Divyanshi Studios API running on http://localhost:${PORT}`);
+    logger.info(`Allowed CORS origins: ${allowedOrigins.join(', ')}`);
+  });
+}
 
 module.exports = app;
