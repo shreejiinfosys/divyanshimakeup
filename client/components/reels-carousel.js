@@ -92,7 +92,10 @@ export async function initReelsCarousel() {
     if (platform === 'video') {
       // Mobile browsers block unmuted autoplay even on a direct tap — start
       // muted (guaranteed to play) and let the native controls unmute.
-      card.innerHTML = `<video src="${url}" controls autoplay muted playsinline></video>`;
+      // controlsList="nofullscreen" hides the native fullscreen button —
+      // our own "expand" button (added below) replaces it, since the
+      // native one goes blank on some mobile browsers for portrait video.
+      card.innerHTML = `<video src="${url}" controls controlsList="nofullscreen noremoteplayback" disablePictureInPicture autoplay muted playsinline></video>`;
       card.classList.add('is-playing');
       addExpandToggle(card);
       return;
@@ -103,8 +106,11 @@ export async function initReelsCarousel() {
     // mute=1 — a cross-origin iframe doesn't inherit our page's user-gesture
     // "permission" to autoplay with sound, so mobile silently refuses to
     // play at all unless it starts muted.
-    card.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&playsinline=1&rel=0"
-      title="Reel video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    // No allowfullscreen attribute — YouTube's own fullscreen button then
+    // does nothing instead of going blank; our custom expand button (below)
+    // is the only working "fullscreen" control.
+    card.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&playsinline=1&rel=0&fs=0"
+      title="Reel video" allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
     card.classList.add('is-playing');
     addExpandToggle(card);
   }

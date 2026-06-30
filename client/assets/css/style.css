@@ -546,6 +546,10 @@ body {
             display: block;
             background: #000;
         }
+        /* Safari ignores controlsList — hide its native fullscreen button too */
+        .reel-card.is-playing video::-webkit-media-controls-fullscreen-button {
+            display: none !important;
+        }
 
         /* Custom "expand" — CSS-only enlarge, never calls the native
            Fullscreen API, so a portrait reel never gets rotated to landscape. */
