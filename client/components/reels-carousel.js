@@ -90,7 +90,9 @@ export async function initReelsCarousel() {
     const platform = card.dataset.platform;
 
     if (platform === 'video') {
-      card.innerHTML = `<video src="${url}" controls autoplay playsinline></video>`;
+      // Mobile browsers block unmuted autoplay even on a direct tap — start
+      // muted (guaranteed to play) and let the native controls unmute.
+      card.innerHTML = `<video src="${url}" controls autoplay muted playsinline></video>`;
       card.classList.add('is-playing');
       addExpandToggle(card);
       return;
@@ -98,7 +100,10 @@ export async function initReelsCarousel() {
 
     const ytId = extractYouTubeId(url);
     if (!ytId) { window.open(url, '_blank', 'noopener,noreferrer'); return; }
-    card.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&playsinline=1&rel=0"
+    // mute=1 — a cross-origin iframe doesn't inherit our page's user-gesture
+    // "permission" to autoplay with sound, so mobile silently refuses to
+    // play at all unless it starts muted.
+    card.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&playsinline=1&rel=0"
       title="Reel video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     card.classList.add('is-playing');
     addExpandToggle(card);
@@ -222,18 +227,25 @@ export async function initReelsCarousel() {
     applyPos();
   });
 
-  let touchStart = 0, touchBase = 0;
+  // Pointer Events already cover drag/swipe on touch devices, so these
+  // legacy Touch Events only need to run for actual swipes — touching a
+  // reel-card must fall through untouched so its tap/click can play it.
+  let touchStart = 0, touchBase = 0, touchOnCard = false;
   track.addEventListener('touchstart', (e) => {
+    touchOnCard = !!e.target.closest('.reel-card');
+    if (touchOnCard) return;
     touchStart = e.touches[0].clientX;
     touchBase = current;
     track.style.transition = 'none';
   }, { passive: true });
   track.addEventListener('touchmove', (e) => {
+    if (touchOnCard) return;
     const diff = touchStart - e.touches[0].clientX;
     const max = maxStep() * stepPx();
     track.style.transform = `translateX(-${Math.max(0, Math.min(max, touchBase * stepPx() + diff))}px)`;
   }, { passive: true });
   track.addEventListener('touchend', (e) => {
+    if (touchOnCard) return;
     const diff = touchStart - e.changedTouches[0].clientX;
     const threshold = stepPx() * 0.25;
     if (diff > threshold) goTo(Math.min(maxStep(), touchBase + 1));

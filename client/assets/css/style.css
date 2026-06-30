@@ -200,7 +200,7 @@ body {
             border-radius: 2px;
         }
         @media (max-width: 768px) {
-            .ba-wrap { aspect-ratio: 4 / 3; }
+            .ba-wrap { aspect-ratio: 3 / 4; }
         }
 
         /* Both images identical — clip-path handles the reveal */
