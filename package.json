@@ -1,0 +1,15 @@
+{
+  "name": "divyanshi-studios",
+  "version": "2.0.0",
+  "description": "Divyanshi Studios — client (public site), admin panel, and server (REST API) monorepo.",
+  "private": true,
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "server": "cd server && npm start",
+    "server:install": "cd server && npm install",
+    "seed": "node scripts/seed.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

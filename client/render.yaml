@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: divyanshi-client
+    env: static
+    staticPublishPath: .
+    buildCommand: echo "Static site — no build step required"
+    routes:
+      - type: rewrite
+        source: /
+        destination: /pages/index.html

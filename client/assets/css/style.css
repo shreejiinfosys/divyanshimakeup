@@ -1,0 +1,703 @@
+/* Divyanshi Studios — Public Site Styles
+   Extracted from inline <style> into a standalone stylesheet. */
+
+body {
+            background-color: #050505;
+            color: #F8F8F8;
+            overflow-x: hidden;
+        }
+        
+        /* Minimalist Glass Nav */
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        /* Editorial Image Hover Effects */
+        .editorial-img-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .editorial-img-container img {
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: grayscale(20%) contrast(110%);
+        }
+        .editorial-img-container:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) contrast(110%);
+        }
+
+        /* Subtle Gold Line Animation */
+        .gold-line-hover {
+            position: relative;
+            display: inline-block;
+        }
+        .gold-line-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        .gold-line-hover:hover::after {
+            width: 100%;
+        }
+
+        /* Custom Ultra-thin Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Ticker Container */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #111111;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        /* ============ PRELOADER ============ */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #preloader .pre-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            font-size: 2.25rem;
+            color: #F8F8F8;
+            opacity: 0;
+            animation: preFade 2.2s ease forwards;
+        }
+        #preloader .pre-line {
+            width: 0;
+            height: 1px;
+            background: #D4AF37;
+            margin: 1.25rem auto 0;
+            animation: preLine 1.6s 0.4s ease forwards;
+        }
+        @keyframes preFade {
+            0% { opacity: 0; letter-spacing: 0.6em; }
+            40% { opacity: 1; }
+            100% { opacity: 1; letter-spacing: 0.35em; }
+        }
+        @keyframes preLine { to { width: 120px; } }
+
+        /* ============ SCROLL PROGRESS ============ */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: linear-gradient(90deg, #D4AF37, #F5E6CE);
+            z-index: 70;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ============ CUSTOM CURSOR (desktop only) ============ */
+        .cursor-dot, .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 90;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 5px;
+            height: 5px;
+            background: #D4AF37;
+        }
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF37;
+            font-size: 0.5rem;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+        .cursor-ring.cursor-grow {
+            width: 64px;
+            height: 64px;
+            background: rgba(212, 175, 55, 0.08);
+        }
+        @media (pointer: coarse), (max-width: 768px) {
+            .cursor-dot, .cursor-ring { display: none; }
+        }
+        @media (pointer: fine) {
+            body { cursor: none; }
+            input, textarea, select, .faq-question { cursor: auto; }
+        }
+
+        /* ============ SCROLL REVEAL ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* ============ STAT COUNTER STRIP ============ */
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ============ BEFORE / AFTER SLIDER ============ */
+        /* ── Before / After Slider (clip-path + CSS custom prop) ── */
+        .ba-wrap {
+            --pos: 50%;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            cursor: ew-resize;
+            background: #050505;
+            border-radius: 2px;
+        }
+        @media (max-width: 768px) {
+            .ba-wrap { aspect-ratio: 4 / 3; }
+        }
+
+        /* Both images identical — clip-path handles the reveal */
+        .ba-wrap .ba-before,
+        .ba-wrap .ba-after {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            pointer-events: none;
+            display: block;
+        }
+        .ba-wrap .ba-after {
+            clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+            will-change: clip-path;
+        }
+
+        /* Thin gold divider line */
+        .ba-line {
+            position: absolute;
+            inset: 0 auto 0 var(--pos);
+            width: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                to bottom,
+                transparent       0%,
+                rgba(212,175,55,.5) 6%,
+                #D4AF37           22%,
+                #D4AF37           78%,
+                rgba(212,175,55,.5) 94%,
+                transparent       100%
+            );
+            box-shadow: 0 0 10px rgba(212,175,55,.2);
+            pointer-events: none;
+            will-change: left;
+        }
+
+        /* Grip circle — same CSS var, no JS left update needed */
+        .ba-grip {
+            position: absolute;
+            top: 50%;
+            left: var(--pos);
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(4,4,4,.88);
+            border: 1px solid rgba(212,175,55,.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            will-change: left;
+            box-shadow: 0 0 0 5px rgba(212,175,55,.07), 0 4px 20px rgba(0,0,0,.6);
+            transition: border-color .25s, box-shadow .25s;
+        }
+        .ba-wrap:hover .ba-grip {
+            border-color: rgba(212,175,55,.9);
+            box-shadow: 0 0 0 8px rgba(212,175,55,.11), 0 4px 28px rgba(0,0,0,.7);
+        }
+
+        /* Labels */
+        .ba-label {
+            position: absolute;
+            bottom: 1.4rem;
+            font-size: .53rem;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            padding: .35rem .9rem;
+            background: rgba(4,4,4,.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212,175,55,.22);
+            color: rgba(248,248,248,.82);
+            pointer-events: none;
+            transition: opacity .5s ease;
+        }
+        .ba-label-before { left: 1.4rem; }
+        .ba-label-after  { right: 1.4rem; }
+
+        /* "Drag" hint that fades out */
+        .ba-hint {
+            position: absolute;
+            top: 1.4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .5rem;
+            letter-spacing: .38em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,.65);
+            pointer-events: none;
+            white-space: nowrap;
+            transition: opacity .8s ease;
+            text-shadow: 0 0 18px rgba(0,0,0,.9);
+        }
+        .ba-hint.gone { opacity: 0; }
+
+        /* ══════════════════════════════════════════
+           ON MY FEED — Glass Morphism Reels Carousel
+           ══════════════════════════════════════════ */
+        #reels {
+            background: #050505;
+            padding: 6rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        #reels::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 55% at 50% 40%, rgba(212,175,55,.05) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 30% at 20% 80%, rgba(212,175,55,.025) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .reels-viewport {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reels-track {
+            display: flex;
+            gap: 14px;
+            will-change: transform;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .reels-track.is-dragging {
+            cursor: grabbing;
+            transition: none !important;
+        }
+
+        /* Glass card */
+        .reel-card {
+            flex: 0 0 calc(25% - 11px);
+            aspect-ratio: 9 / 16;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            text-decoration: none;
+            display: block;
+            background: rgba(255,255,255,.025);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(212,175,55,.1);
+            transition: border-color .45s ease, transform .45s ease, box-shadow .45s ease;
+            flex-shrink: 0;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .reel-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(212,175,55,0);
+            transition: box-shadow .45s ease;
+            pointer-events: none;
+        }
+        .reel-card:hover {
+            border-color: rgba(212,175,55,.55);
+            transform: translateY(-8px) scale(1.015);
+            box-shadow:
+                0 28px 54px rgba(0,0,0,.6),
+                0 0 0 1px rgba(212,175,55,.18),
+                0 0 28px rgba(212,175,55,.18),
+                0 0 64px rgba(212,175,55,.08);
+        }
+        .reel-card:hover::after {
+            box-shadow: inset 0 0 24px rgba(212,175,55,.12);
+        }
+
+        /* Thumbnail / placeholder fills */
+        .reel-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+        .reel-ig-bg {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg,#405DE6 0%,#833AB4 35%,#E1306C 65%,#F77737 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .reel-ig-bg i { font-size: 2.8rem; color: rgba(255,255,255,.6); }
+        .reel-yt-bg {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg,#1a1a1a 0%,#0d0d0d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .reel-yt-bg i { font-size: 2.8rem; color: rgba(255,0,0,.55); }
+
+        /* Empty slot */
+        .reel-empty {
+            flex: 0 0 calc(25% - 11px);
+            aspect-ratio: 9 / 16;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.012);
+            border: 1px dashed rgba(212,175,55,.08);
+            flex-shrink: 0;
+        }
+        .reel-empty i { font-size: 1.4rem; color: rgba(212,175,55,.12); }
+
+        /* Hover overlay */
+        .reel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,.72) 0%,
+                rgba(0,0,0,.18) 40%,
+                transparent 100%
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .reel-card:hover .reel-overlay { opacity: 1; }
+
+        .reel-play-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(212,175,55,.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 18px rgba(0,0,0,.5);
+        }
+
+        .reel-platform-pill {
+            font-size: .52rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(248,248,248,.8);
+            background: rgba(5,5,5,.65);
+            backdrop-filter: blur(8px);
+            padding: 3px 9px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,.08);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Nav buttons */
+        .reel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(5,5,5,.78);
+            border: 1px solid rgba(212,175,55,.28);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #D4AF37;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .22s;
+            font-size: .75rem;
+            flex-shrink: 0;
+        }
+        .reel-arrow:hover:not(:disabled) {
+            background: rgba(212,175,55,.14);
+            border-color: rgba(212,175,55,.65);
+            box-shadow: 0 0 18px rgba(212,175,55,.12);
+        }
+        .reel-arrow:disabled { opacity: .2; cursor: default; }
+        #reel-prev { left: -21px; }
+        #reel-next { right: -21px; }
+
+        /* Progress dots */
+        .reel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 26px; }
+        .reel-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            cursor: pointer;
+            transition: all .3s;
+            border: none;
+            padding: 0;
+        }
+        .reel-dot.on {
+            background: #D4AF37;
+            width: 20px;
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .reel-card, .reel-empty { flex-basis: calc(33.333% - 10px); }
+        }
+        @media (max-width: 768px) {
+            .reel-card, .reel-empty { flex-basis: calc(50% - 7px); }
+            #reel-prev { left: -18px; }
+            #reel-next { right: -18px; }
+        }
+        @media (max-width: 480px) {
+            .reel-card, .reel-empty { flex-basis: 78%; }
+        }
+
+        /* Reel plays inline, in its own card */
+        .reel-card.is-playing { cursor: default; }
+        .reel-card iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+        .reel-card.is-playing video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        /* Custom "expand" — CSS-only enlarge, never calls the native
+           Fullscreen API, so a portrait reel never gets rotated to landscape. */
+        .reel-expand-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 5;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.55);
+            border: 1px solid rgba(212,175,55,.35);
+            color: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: background .25s, transform .25s;
+        }
+        .reel-expand-btn:hover { background: rgba(0,0,0,.8); transform: scale(1.08); }
+
+        .reel-card.reel-fullscreen {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: min(94vw, 56.25vh) !important;
+            height: min(94vh, 167vw) !important;
+            max-width: 480px;
+            z-index: 9999;
+            border-radius: 14px;
+        }
+        body.reel-fullscreen-active::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.92);
+            z-index: 9998;
+        }
+        body.reel-fullscreen-active { overflow: hidden; }
+
+        /* Instagram embed fills the card — this is also the only way to
+           show a real thumbnail since Instagram has no public thumbnail API */
+        .reel-card-ig {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .reel-card-ig blockquote.instagram-media {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+        }
+        .reel-card-ig iframe {
+            min-width: 0 !important;
+        }
+
+        /* ============ TESTIMONIAL CAROUSEL ============ */
+        .testi-track {
+            display: flex;
+            transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .testi-slide {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+        .testi-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #333;
+            transition: background 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .testi-dot.active {
+            background: #D4AF37;
+            transform: scale(1.3);
+        }
+
+        /* ============ FAQ ACCORDION ============ */
+        .faq-item { border-bottom: 1px solid rgba(212,175,55,0.12); }
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.75rem 0;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s ease;
+        }
+        .faq-item.open .faq-answer {
+            padding-bottom: 1.75rem;
+        }
+        .faq-icon { transition: transform 0.4s ease; }
+        .faq-item.open .faq-icon { transform: rotate(135deg); }
+
+        /* ============ LIGHTBOX ============ */
+        #lightbox img {
+            max-height: 85vh;
+            max-width: 90vw;
+            object-fit: contain;
+        }
+
+        /* ============ FLOATING BUTTONS ============ */
+        #back-to-top {
+            position: fixed;
+            z-index: 60;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, opacity 0.4s ease;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(17,17,17,0.9);
+            border: 1px solid rgba(212,175,55,0.4);
+            color: #D4AF37;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #back-to-top:hover { transform: scale(1.08); }
+
+        /* Magnetic gold button micro-interaction */
+        .btn-gold-fill {
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .btn-gold-fill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #D4AF37;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.65,0,0.35,1);
+            z-index: -1;
+        }
+        .btn-gold-fill:hover::before { transform: scaleX(1); }

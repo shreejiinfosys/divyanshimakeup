@@ -1,0 +1,127 @@
+{
+  "bookings": [
+    {
+      "id": "BK-405464",
+      "name": "Ajay",
+      "phone": "8858662255",
+      "date": "2026-06-30",
+      "service": "Red Carpet",
+      "message": "i would like to know more about the services",
+      "submittedAt": "2026-06-30T09:23:25.464Z",
+      "status": "pending",
+      "notes": "",
+      "read": true
+    },
+    {
+      "id": "BK-881024",
+      "name": "Priya Malhotra",
+      "phone": "+91 98001 23456",
+      "date": "2026-08-17",
+      "service": "Bridal",
+      "message": "Looking for a complete bridal experience for my reception in Udaipur — I want a timeless yet modern dewy finish. Wedding is across 4 days at a heritage property.",
+      "submittedAt": "2026-06-28T10:00:00.000Z",
+      "status": "confirmed",
+      "notes": "Trial scheduled next Saturday. Client prefers dewy skin, no heavy contouring.",
+      "read": true
+    },
+    {
+      "id": "BK-771563",
+      "name": "Riya Khandelwal",
+      "phone": "+91 99887 65432",
+      "date": "2026-07-11",
+      "service": "Red Carpet",
+      "message": "Film premiere at PVR Juhu. Need full glam for the red carpet. Prefer bold eye, clean base, long-wear.",
+      "submittedAt": "2026-06-29T09:00:00.000Z",
+      "status": "pending",
+      "notes": "",
+      "read": true
+    },
+    {
+      "id": "BK-660891",
+      "name": "Sneha Agarwal",
+      "phone": "+91 97654 32109",
+      "date": "2026-08-01",
+      "service": "Editorial",
+      "message": "Brand campaign for a luxury skincare label. Three distinct looks over a 2-day studio shoot in Mumbai.",
+      "submittedAt": "2026-06-26T09:00:00.000Z",
+      "status": "confirmed",
+      "notes": "Brief sent and approved. Colour palette: terracotta and nude.",
+      "read": true
+    },
+    {
+      "id": "BK-554217",
+      "name": "Ananya Joshi",
+      "phone": "+91 96543 21098",
+      "date": "2026-09-26",
+      "service": "Bridal",
+      "message": "Destination wedding in Goa in October. Looking for a breezy ethereal look with warm gold tones — Hindu ceremony + cocktail night.",
+      "submittedAt": "2026-06-24T09:00:00.000Z",
+      "status": "pending",
+      "notes": "",
+      "read": true
+    },
+    {
+      "id": "BK-443072",
+      "name": "Meera Iyer",
+      "phone": "+91 95432 10987",
+      "date": "2026-06-15",
+      "service": "Red Carpet",
+      "message": "Award show appearance — short lead time. Structured editorial look that photographs well under flash.",
+      "submittedAt": "2026-06-09T09:00:00.000Z",
+      "status": "completed",
+      "notes": "Event done. Outstanding feedback. Follow up for Filmfare.",
+      "read": true
+    },
+    {
+      "id": "BK-332859",
+      "name": "Kavya Reddy",
+      "phone": "+91 94321 09876",
+      "date": "2026-08-31",
+      "service": "Bridal",
+      "message": "Full team needed for mehendi, haldi, and reception — three looks. South Indian bride, gold-heavy jewellery.",
+      "submittedAt": "2026-06-22T09:00:00.000Z",
+      "status": "pending",
+      "notes": "",
+      "read": true
+    }
+  ],
+  "reels": [
+    {
+      "url": "https://res.cloudinary.com/dtfegfsie/video/upload/v1782807259/reels_1_owmqj3.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dtfegfsie/video/upload/v1782807259/reels_2_jjrye3.mp4"
+    },
+    {
+      "url": "https://youtube.com/shorts/dqwPFyRPYzs?si=MDXrGhDw5RfZkTHg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dtfegfsie/video/upload/v1782807259/reels_3_zpkxoc.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dtfegfsie/video/upload/v1782807260/reels_4_t7dilx.mp4"
+    },
+    {
+      "url": "https://youtube.com/shorts/znEGR2f5adY?si=nh6fSax3WafeN5Kg"
+    },
+    {
+      "url": "https://youtube.com/shorts/lfb7JsDFXJA?si=TIvZszMHu31MEeDv"
+    },
+    {
+      "url": "https://youtube.com/shorts/ekgpi0pQeOs?si=1EAPmTWpjQTKw40Q"
+    }
+  ],
+  "images": {
+    "ba_before": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782805684/before_z0zdgt.png",
+    "ba_after": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782805677/after_ck4lxz.png",
+    "portfolio_2": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782805721/2_nbkdcy.png",
+    "portfolio_4": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782806902/model_vwgnae.png",
+    "svc_redcarpet": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782806292/red_carpet_lubgja.png",
+    "svc_bridal": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782806534/bridal_aczngj.png",
+    "svc_editorial": "https://res.cloudinary.com/dtfegfsie/image/upload/v1782806640/editorial_xoayrc.png"
+  },
+  "adminAuth": {
+    "username": "admin",
+    "password": "12345"
+  }
+}

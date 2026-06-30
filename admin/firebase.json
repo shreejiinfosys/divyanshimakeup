@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "rewrites": [{ "source": "/", "destination": "/pages/index.html" }],
+    "headers": [
+      { "source": "**", "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]},
+      { "source": "**/*.@(html)", "headers": [{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }] }
+    ]
+  }
+}

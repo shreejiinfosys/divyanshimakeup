@@ -1,0 +1,19 @@
+{
+  "name": "divyanshi-studios-server",
+  "version": "1.0.0",
+  "description": "Backend API for Divyanshi Studios — bookings, reels, and image management.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node ../scripts/seed.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

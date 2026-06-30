@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: divyanshi-admin
+    env: static
+    staticPublishPath: .
+    buildCommand: echo "Static site — no build step required"
+    headers:
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+    routes:
+      - type: rewrite
+        source: /
+        destination: /pages/index.html

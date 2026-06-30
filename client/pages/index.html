@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <!-- Set the backend API URL for this environment. Update before deploying. -->
+    <script>window.__API_BASE_URL__ = 'http://localhost:5000/api';</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyanshi | Celebrity Makeup Artist &amp; Hair Stylist — Mumbai, New Delhi, Global</title>
+    <meta name="description" content="Divyanshi is an internationally recognized celebrity makeup artist specializing in red carpet, haute couture bridal, and editorial beauty. Private consultations by inquiry — Mumbai, New Delhi &amp; worldwide.">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Divyanshi | Celebrity Makeup Artist">
+    <meta property="og:description" content="Redefining glamour for the world's most photographed faces. Red carpet, bridal &amp; editorial artistry — by private inquiry.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Favicon: gold monogram on obsidian, inline so no extra asset is needed -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='34' fill='%23D4AF37' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+
+    <!-- Google Fonts: Cormorant Garamond for high-fashion serif, Montserrat for clean minimalist sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        gold_light: '#F5E6CE',
+                        obsidian: '#050505',
+                        charcoal: '#111111',
+                        smoke: '#888888',
+                        pearl: '#F8F8F8'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1.5s ease-out forwards',
+                        'slide-up': 'slideUp 1s ease-out forwards',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="font-sans antialiased text-pearl selection:bg-gold selection:text-obsidian">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="text-center">
+            <span class="pre-mark">DIVYANSHI</span>
+            <div class="pre-line"></div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Custom Cursor (desktop only) -->
+    <div class="cursor-ring" id="cursor-ring"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500 py-4" id="navbar">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center">
+                <!-- Mobile menu button (Left) -->
+                <div class="md:hidden flex items-center w-1/3">
+                    <button id="mobile-menu-btn" class="text-pearl hover:text-gold focus:outline-none transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Desktop Left Links -->
+                <div class="hidden md:flex items-center space-x-10 w-1/3">
+                    <a href="#about" class="text-xs uppercase tracking-[0.2em] gold-line-hover">The Artist</a>
+                    <a href="#portfolio" class="text-xs uppercase tracking-[0.2em] gold-line-hover">Portfolio</a>
+                </div>
+
+                <!-- Logo (Center) -->
+                <div class="flex-shrink-0 flex items-center justify-center w-1/3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="text-center">
+                        <span class="font-serif text-3xl md:text-4xl font-light tracking-[0.2em] text-pearl block">
+                            DIVYANSHI
+                        </span>
+                        <span class="text-[0.6rem] uppercase tracking-[0.4em] text-gold mt-1 block">Makeup & Hair</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Right Links -->
+                <div class="hidden md:flex items-center justify-end space-x-10 w-1/3">
+                    <a href="#services" class="text-xs uppercase tracking-[0.2em] gold-line-hover">Services</a>
+                    <a href="#inquire" class="text-xs uppercase tracking-[0.2em] text-gold border-b border-gold pb-1 hover:text-pearl hover:border-pearl transition-all duration-300">Inquire</a>
+                </div>
+
+                <!-- Mobile Empty Space (Right) for centering -->
+                <div class="md:hidden w-1/3"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-obsidian border-b border-charcoal shadow-2xl backdrop-blur-lg bg-opacity-95">
+            <div class="flex flex-col items-center py-8 space-y-6">
+                <a href="#about" class="text-sm uppercase tracking-[0.2em] text-pearl hover:text-gold transition-colors">The Artist</a>
+                <a href="#portfolio" class="text-sm uppercase tracking-[0.2em] text-pearl hover:text-gold transition-colors">Portfolio</a>
+                <a href="#services" class="text-sm uppercase tracking-[0.2em] text-pearl hover:text-gold transition-colors">Services</a>
+                <a href="#reviews" class="text-sm uppercase tracking-[0.2em] text-pearl hover:text-gold transition-colors">Reviews</a>
+                <a href="#faq" class="text-sm uppercase tracking-[0.2em] text-pearl hover:text-gold transition-colors">FAQ</a>
+                <a href="#inquire" class="text-sm uppercase tracking-[0.2em] text-gold transition-colors mt-4">Private Inquiry</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Editorial Image -->
+        <div class="absolute inset-0 z-0">
+            <!-- Using a dramatic, high-fashion beauty portrait -->
+            <img data-img-key="hero" src="https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=2006&auto=format&fit=crop" alt="High Fashion Makeup" class="w-full h-full object-cover object-top opacity-60" onerror="this.src='https://placehold.co/1920x1080/050505/D4AF37?text=Divyanshi+Editorial'">
+            <!-- Gradients for depth and text readability -->
+            <div class="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-obsidian/60 via-transparent to-obsidian/60"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 mt-20">
+            <div class="opacity-0 animate-slide-up" style="animation-delay: 0.2s;">
+                <p class="text-gold text-[0.65rem] md:text-xs uppercase tracking-[0.5em] mb-6">Celebrity & Editorial</p>
+            </div>
+            <div class="opacity-0 animate-fade-in" style="animation-delay: 0.5s;">
+                <h1 class="font-serif text-6xl md:text-8xl lg:text-[9rem] leading-none text-pearl font-light tracking-wide mb-6">
+                    Redefining <br> <span class="italic text-gold_light">Glamour</span>
+                </h1>
+            </div>
+            <div class="opacity-0 animate-slide-up" style="animation-delay: 0.8s;">
+                <a href="#inquire" class="btn-gold-fill inline-block border border-gold/50 text-pearl px-10 py-4 uppercase tracking-[0.2em] text-xs hover:text-obsidian hover:border-gold transition-colors duration-500 mt-8 backdrop-blur-sm" data-cursor="BOOK">
+                    Request Booking
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in" style="animation-delay: 1.5s;">
+            <span class="text-[0.5rem] uppercase tracking-[0.3em] text-smoke mb-2 rotate-90 my-4">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- As Seen In (Press Banner) -->
+    <div class="ticker-wrap flex items-center">
+        <div class="w-full flex justify-center text-smoke text-[0.6rem] uppercase tracking-[0.4em] mb-4 absolute z-10 mt-[-40px]">Featured Clientele & Press</div>
+        <div class="flex animate-marquee whitespace-nowrap items-center opacity-50 hover:opacity-100 transition-opacity duration-500">
+            <!-- Simulated Logos using text for elegance -->
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Vogue</span>
+            <span class="mx-16 font-sans font-light text-2xl tracking-[0.3em] uppercase">Harper's</span>
+            <span class="mx-16 font-serif italic text-3xl tracking-widest">Elle</span>
+            <span class="mx-16 font-sans font-bold text-2xl tracking-widest uppercase">GQ</span>
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Cosmopolitan</span>
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Filmfare</span>
+            <!-- Repeat for seamless loop -->
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Vogue</span>
+            <span class="mx-16 font-sans font-light text-2xl tracking-[0.3em] uppercase">Harper's</span>
+            <span class="mx-16 font-serif italic text-3xl tracking-widest">Elle</span>
+            <span class="mx-16 font-sans font-bold text-2xl tracking-widest uppercase">GQ</span>
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Cosmopolitan</span>
+            <span class="mx-16 font-serif text-3xl tracking-widest uppercase">Filmfare</span>
+        </div>
+    </div>
+
+    <!-- Stats Counter Strip -->
+    <section class="bg-obsidian py-20 border-b border-charcoal">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 text-center reveal">
+                <div>
+                    <span class="stat-num text-5xl md:text-6xl text-gold_light block" data-count="14">0</span>
+                    <span class="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-smoke mt-3 block">Years in Industry</span>
+                </div>
+                <div>
+                    <span class="stat-num text-5xl md:text-6xl text-gold_light block" data-count="600" data-suffix="+">0</span>
+                    <span class="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-smoke mt-3 block">Brides Styled</span>
+                </div>
+                <div>
+                    <span class="stat-num text-5xl md:text-6xl text-gold_light block" data-count="40" data-suffix="+">0</span>
+                    <span class="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-smoke mt-3 block">Cover Shoots</span>
+                </div>
+                <div>
+                    <span class="stat-num text-5xl md:text-6xl text-gold_light block" data-count="120" data-suffix="+">0</span>
+                    <span class="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-smoke mt-3 block">Red Carpet Events</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Transformation (Signature Section) -->
+    <section class="py-32 bg-charcoal relative overflow-hidden">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
+                <!-- Text column -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="h-[1px] w-16 bg-gold"></div>
+                        <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem]">The Proof</span>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light mb-8 leading-tight">
+                        Drag the line. <span class="italic text-gold_light">See the artistry.</span>
+                    </h2>
+                    <p class="text-smoke font-light text-sm md:text-base leading-relaxed max-w-md mb-10">
+                        Every transformation begins with the bone structure already there. Divyanshi's work isn't about hiding a face — it's about revealing the most luminous version of it, frame-ready and unmistakably your own.
+                    </p>
+                    <a href="#portfolio" class="self-start text-xs uppercase tracking-[0.2em] gold-line-hover text-pearl" data-cursor="VIEW">Explore the Full Archive</a>
+                </div>
+
+                <!-- Before / After Slider -->
+                <div class="lg:col-span-7">
+                    <div class="ba-wrap reveal" id="ba-slider" data-cursor="DRAG">
+
+                        <!-- Before image (full, background layer) -->
+                        <img class="ba-before" data-img-key="ba_before"
+                             src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1400&auto=format&fit=crop"
+                             alt="Before makeup"
+                             loading="eager"
+                             onerror="this.src='https://placehold.co/900x1125/111/555?text=Before'">
+
+                        <!-- After image (clip-path reveal — no stretching) -->
+                        <img class="ba-after" id="ba-after-img" data-img-key="ba_after"
+                             src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1400&auto=format&fit=crop"
+                             alt="After makeup"
+                             loading="eager"
+                             onerror="this.src='https://placehold.co/900x1125/050505/D4AF37?text=After'">
+
+                        <!-- Divider line (driven by --pos) -->
+                        <div class="ba-line"></div>
+
+                        <!-- Grip handle (driven by --pos) -->
+                        <div class="ba-grip" id="ba-grip">
+                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
+                                <path d="M1 6H21M1 6L5 2M1 6L5 10M21 6L17 2M21 6L17 10"
+                                      stroke="#D4AF37" stroke-width="1.25"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <!-- Corner labels -->
+                        <span class="ba-label ba-label-before" id="ba-lbl-before">Before</span>
+                        <span class="ba-label ba-label-after"  id="ba-lbl-after">After</span>
+
+                        <!-- Drag hint (fades out after first interaction / demo) -->
+                        <div class="ba-hint" id="ba-hint">← Drag to Reveal →</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- The Artist Section -->
+    <section id="about" class="py-32 relative bg-obsidian">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- Image column -->
+                <div class="lg:col-span-5 editorial-img-container relative reveal">
+                    <img data-img-key="about" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1760&auto=format&fit=crop" loading="lazy" alt="Divyanshi Working" class="w-full h-auto object-cover relative z-10" onerror="this.src='https://placehold.co/800x1000/111/D4AF37?text=Divyanshi'">
+                    <!-- Decorative Element -->
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 border-b border-r border-gold z-0 hidden md:block"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 border-t border-l border-gold z-0 hidden md:block"></div>
+                </div>
+
+                <!-- Text column -->
+                <div class="lg:col-span-7 lg:pl-10 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="h-[1px] w-16 bg-gold"></div>
+                        <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem]">The Visionary</span>
+                    </div>
+                    
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light mb-8 leading-tight">
+                        Crafting iconic looks for the <span class="italic text-gold_light">world's most photographed</span> faces.
+                    </h2>
+                    
+                    <div class="space-y-6 text-smoke font-light text-sm md:text-base leading-relaxed max-w-2xl">
+                        <p>
+                            Divyanshi is an internationally recognized makeup artist known for her signature "lit-from-within" skin and masterful contouring. With a clientele spanning Bollywood royalty, supermodels, and global icons, her work frequently graces the covers of top-tier fashion publications and global red carpets.
+                        </p>
+                        <p>
+                            Her philosophy is deeply rooted in enhancing individual bone structure and personal aura, rather than masking it. Using only exclusive, luxury formulations, she delivers a flawless, high-definition finish that withstands the scrutiny of flash photography and cinematic lenses.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-6">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Signature_of_John_Hancock.svg" alt="Signature" class="h-12 opacity-60 filter invert" style="filter: invert(1) brightness(100) sepia(100%) hue-rotate(5deg) saturate(300%);">
+                        <div class="text-[0.65rem] uppercase tracking-widest text-smoke border-l border-charcoal pl-6">
+                            Founder & <br> Lead Artist
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- The Journey / Process -->
+    <section class="py-32 bg-obsidian border-t border-charcoal">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-24 reveal">
+                <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem] block mb-4">How It Works</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light">The Client Journey</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="reveal">
+                    <span class="font-serif text-gold text-3xl italic block mb-6">01.</span>
+                    <h3 class="text-base uppercase tracking-[0.15em] mb-4">Private Consultation</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed">A one-on-one discovery call to understand the event, the lighting, the lens, and the look you're chasing.</p>
+                </div>
+                <div class="reveal">
+                    <span class="font-serif text-gold text-3xl italic block mb-6">02.</span>
+                    <h3 class="text-base uppercase tracking-[0.15em] mb-4">Trial Session</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed">A full trial in-studio to test finishes, longevity, and skin response well ahead of the actual date.</p>
+                </div>
+                <div class="reveal">
+                    <span class="font-serif text-gold text-3xl italic block mb-6">03.</span>
+                    <h3 class="text-base uppercase tracking-[0.15em] mb-4">Event Day Artistry</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed">On-site application timed precisely around hair, styling, and call sheets — calm, unhurried, exact.</p>
+                </div>
+                <div class="reveal">
+                    <span class="font-serif text-gold text-3xl italic block mb-6">04.</span>
+                    <h3 class="text-base uppercase tracking-[0.15em] mb-4">Touch-Up &amp; Aftercare</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed">A bespoke touch-up kit and on-call support for the full duration of your event or shoot.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Services (Editorial Layout) -->
+    <section id="services" class="py-32 bg-charcoal">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+            
+            <div class="text-center mb-24 reveal">
+                <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem] block mb-4">Expertise</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-8">Signature Offerings</h2>
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[0.65rem] uppercase tracking-[0.25em] text-smoke">
+                    <span>Makeup</span>
+                    <span class="text-gold/30">•</span>
+                    <span>Skin</span>
+                    <span class="text-gold/30">•</span>
+                    <span>Hair</span>
+                    <span class="text-gold/30">•</span>
+                    <span>Nails</span>
+                    <span class="text-gold/30">•</span>
+                    <span>Eyelashes</span>
+                    <span class="text-gold/30">•</span>
+                    <span>Academy</span>
+                </div>
+            </div>
+
+            <!-- Service 1: Red Carpet -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 mb-16 items-center group reveal">
+                <div class="editorial-img-container h-[60vh] md:h-[70vh] order-2 md:order-1">
+                    <img data-img-key="svc_redcarpet" src="https://images.unsplash.com/photo-1615212513476-8051a66bb34d?q=80&w=2070&auto=format&fit=crop" loading="lazy" alt="Red Carpet" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-obsidian p-10 md:p-20 h-full flex flex-col justify-center order-1 md:order-2 border-l border-gold/10">
+                    <span class="text-smoke text-[0.65rem] uppercase tracking-[0.3em] mb-4">01.</span>
+                    <h3 class="font-serif text-3xl md:text-4xl mb-6">Red Carpet & Events</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed mb-8">
+                        Flawless, long-wearing applications designed specifically to photograph beautifully under intense media lighting and diverse environments. Exclusive prep and on-site touch-up services available.
+                    </p>
+                    <a href="#inquire" class="self-start text-xs uppercase tracking-[0.2em] gold-line-hover text-pearl">Inquire Availability</a>
+                </div>
+            </div>
+
+            <!-- Service 2: Haute Bridal -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 mb-16 items-center group reveal">
+                <div class="bg-obsidian p-10 md:p-20 h-full flex flex-col justify-center border-r border-gold/10">
+                    <span class="text-smoke text-[0.65rem] uppercase tracking-[0.3em] mb-4">02.</span>
+                    <h3 class="font-serif text-3xl md:text-4xl mb-6">Haute Couture Bridal</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed mb-8">
+                        A highly curated, bespoke bridal experience. We conceptualize a cohesive beauty narrative for your wedding series, utilizing airbrush techniques and elite skincare for ethereal elegance.
+                    </p>
+                    <a href="#inquire" class="self-start text-xs uppercase tracking-[0.2em] gold-line-hover text-pearl">View Bridal Deck</a>
+                </div>
+                <div class="editorial-img-container h-[60vh] md:h-[70vh]">
+                    <img data-img-key="svc_bridal" src="https://images.unsplash.com/photo-1542332608-208151a660a1?q=80&w=2070&auto=format&fit=crop" loading="lazy" alt="Bridal" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Service 3: Editorial -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center group reveal">
+                <div class="editorial-img-container h-[60vh] md:h-[70vh] order-2 md:order-1">
+                    <img data-img-key="svc_editorial" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?q=80&w=1974&auto=format&fit=crop" loading="lazy" alt="Editorial Content" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-obsidian p-10 md:p-20 h-full flex flex-col justify-center order-1 md:order-2 border-l border-gold/10">
+                    <span class="text-smoke text-[0.65rem] uppercase tracking-[0.3em] mb-4">03.</span>
+                    <h3 class="font-serif text-3xl md:text-4xl mb-6">Editorial & Campaign</h3>
+                    <p class="text-smoke font-light text-sm leading-relaxed mb-8">
+                        Collaborative artistry for fashion editorials, brand campaigns, and music videos. Bringing avant-garde concepts and pristine commercial beauty to life on set.
+                    </p>
+                    <a href="#inquire" class="self-start text-xs uppercase tracking-[0.2em] gold-line-hover text-pearl">Request Portfolio</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Portfolio Archive -->
+    <section id="portfolio" class="py-32 bg-obsidian">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light">The Archive</h2>
+                    <p class="text-smoke uppercase tracking-[0.2em] text-xs mt-4">Selected Works</p>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <a href="#" class="text-xs uppercase tracking-[0.2em] gold-line-hover flex items-center gap-3">
+                        View Full Gallery <i class="fa-solid fa-arrow-right text-[0.6rem]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Asymmetric Editorial Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 reveal">
+                <!-- Large Image -->
+                <div class="col-span-2 md:col-span-2 row-span-2 editorial-img-container h-[50vh] md:h-[80vh] cursor-pointer" data-cursor="VIEW" onclick="openLightbox(0)">
+                    <img data-img-key="portfolio_1" src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop" loading="lazy" class="w-full h-full object-cover" alt="Portfolio 1">
+                </div>
+                <!-- Small Image 1 -->
+                <div class="col-span-1 md:col-span-1 editorial-img-container h-[24vh] md:h-[38vh] cursor-pointer" data-cursor="VIEW" onclick="openLightbox(1)">
+                    <img data-img-key="portfolio_2" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" loading="lazy" class="w-full h-full object-cover" alt="Portfolio 2">
+                </div>
+                <!-- Small Image 2 -->
+                <div class="col-span-1 md:col-span-1 editorial-img-container h-[24vh] md:h-[38vh] cursor-pointer" data-cursor="VIEW" onclick="openLightbox(2)">
+                    <img data-img-key="portfolio_3" src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2069&auto=format&fit=crop" loading="lazy" class="w-full h-full object-cover" alt="Portfolio 3">
+                </div>
+                <!-- Medium Image wide -->
+                <div class="col-span-2 md:col-span-2 editorial-img-container h-[24vh] md:h-[38vh] cursor-pointer" data-cursor="VIEW" onclick="openLightbox(3)">
+                    <img data-img-key="portfolio_4" src="https://images.unsplash.com/photo-1512496015851-a1cbfc34384a?q=80&w=2070&auto=format&fit=crop" loading="lazy" class="w-full h-full object-cover object-top" alt="Portfolio 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         ON MY FEED — Reels Carousel
+         ═══════════════════════════════════ -->
+    <section id="reels" class="reveal">
+        <div class="max-w-[1400px] mx-auto px-8 lg:px-16">
+
+            <!-- Header -->
+            <div class="text-center mb-14 reveal">
+                <span class="text-gold uppercase tracking-[0.35em] text-[0.6rem] block mb-3">Social</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light">On My Feed</h2>
+                <div style="width:30px;height:1px;background:#D4AF37;margin:14px auto 0;opacity:.55"></div>
+            </div>
+
+            <!-- Carousel -->
+            <div style="position:relative; padding: 0 24px;">
+                <button class="reel-arrow" id="reel-prev" aria-label="Previous reels">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="reels-viewport">
+                    <div class="reels-track" id="reels-track">
+                        <!-- Rendered by JS — fetched from the backend API -->
+                    </div>
+                </div>
+
+                <button class="reel-arrow" id="reel-next" aria-label="Next reels">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Dots -->
+            <div class="reel-dots" id="reel-dots"></div>
+
+            <!-- CTA hint -->
+            <p class="text-center mt-8" style="font-size:.58rem; letter-spacing:.25em; text-transform:uppercase; color:#333;">
+                Click any reel to watch the full video
+            </p>
+
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews" class="py-32 bg-charcoal border-t border-gold/10 relative overflow-hidden">
+        <div class="max-w-screen-md mx-auto px-6 lg:px-12 text-center relative z-10">
+            <div class="reveal mb-16">
+                <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem] block mb-4">Client Words</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light">In Their Own Words</h2>
+            </div>
+
+            <div class="relative reveal">
+                <i class="fa-solid fa-quote-left text-gold/30 text-3xl mb-8 block"></i>
+                <div class="overflow-hidden">
+                    <div class="testi-track" id="testi-track">
+                        <div class="testi-slide px-2">
+                            <p class="font-serif italic text-2xl md:text-3xl leading-relaxed text-pearl mb-8">"She didn't just do my makeup, she understood exactly how I wanted to feel walking into that room. Eleven hours later, not a single touch-up needed."</p>
+                            <span class="text-gold text-[0.65rem] uppercase tracking-[0.25em]">Bridal Client — South Mumbai</span>
+                        </div>
+                        <div class="testi-slide px-2">
+                            <p class="font-serif italic text-2xl md:text-3xl leading-relaxed text-pearl mb-8">"On set, under harsh studio lighting, the finish held without a hint of shine or fade. The most reliable artist I've worked with for cover shoots."</p>
+                            <span class="text-gold text-[0.65rem] uppercase tracking-[0.25em]">Fashion Editor, Lifestyle Magazine</span>
+                        </div>
+                        <div class="testi-slide px-2">
+                            <p class="font-serif italic text-2xl md:text-3xl leading-relaxed text-pearl mb-8">"Calm, precise, and incredibly fast under pressure — exactly what you need backstage twenty minutes before a red carpet call time."</p>
+                            <span class="text-gold text-[0.65rem] uppercase tracking-[0.25em]">Actress, Hindi Film Industry</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-3 mt-12" id="testi-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-32 bg-obsidian">
+        <div class="max-w-screen-md mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20 reveal">
+                <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem] block mb-4">Good to Know</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light">Frequently Asked</h2>
+            </div>
+
+            <div class="reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 class="text-base md:text-lg font-light pr-6">How far in advance should I book for my wedding date?</h3>
+                        <i class="fa-solid fa-plus faq-icon text-gold"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-smoke font-light text-sm leading-relaxed">For peak wedding season (Oct–Feb), we recommend reaching out 6–9 months ahead. Editorial and red-carpet requests can often be accommodated with shorter notice depending on travel schedules.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 class="text-base md:text-lg font-light pr-6">Do you travel outside Mumbai and Delhi?</h3>
+                        <i class="fa-solid fa-plus faq-icon text-gold"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-smoke font-light text-sm leading-relaxed">Yes — destination weddings, international shoots, and out-of-city events are accepted regularly. Travel, stay, and on-location logistics are arranged as part of your proposal.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 class="text-base md:text-lg font-light pr-6">Is a trial session included?</h3>
+                        <i class="fa-solid fa-plus faq-icon text-gold"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-smoke font-light text-sm leading-relaxed">Every bridal and major event booking includes one in-studio trial. This is where we finalize the look, test wear-time, and confirm products against your skin under your specific event lighting.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 class="text-base md:text-lg font-light pr-6">What does an inquiry cost, and how is pricing structured?</h3>
+                        <i class="fa-solid fa-plus faq-icon text-gold"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-smoke font-light text-sm leading-relaxed">The consultation is complimentary. Final pricing is bespoke — built around event duration, location, team size, and product requirements — and shared as a personalised proposal after your inquiry.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 class="text-base md:text-lg font-light pr-6">Which products and brands are used?</h3>
+                        <i class="fa-solid fa-plus faq-icon text-gold"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-smoke font-light text-sm leading-relaxed">Only professional, high-definition, long-wear formulations suited to camera and flash photography. Skin-specific and hypoallergenic alternatives are available on request — let us know during your consultation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concierge / Booking Section -->
+    <section id="inquire" class="py-32 relative bg-charcoal border-t border-gold/10">
+        <!-- Abstract Background Detail -->
+        <div class="absolute top-0 right-0 w-[40vw] h-full bg-obsidian z-0 hidden lg:block"></div>
+
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+                
+                <!-- Contact Info -->
+                <div class="flex flex-col justify-center reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="h-[1px] w-12 bg-gold"></div>
+                        <span class="text-gold uppercase tracking-[0.3em] text-[0.65rem]">Private Client Services</span>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-light mb-8">Request a Consultation</h2>
+                    <p class="text-smoke font-light text-sm leading-relaxed mb-16 max-w-md">
+                        Due to high demand and frequent travel for editorial assignments, Divyanshi accepts private bridal and red-carpet bookings upon application. Please provide detailed information regarding your event.
+                    </p>
+
+                    <div class="space-y-8 font-light text-sm">
+                        <div class="flex flex-col">
+                            <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-2">Management & Press</span>
+                            <a href="mailto:press@divyanshimakeover.com" class="hover:text-gold transition-colors">press@divyanshimakeover.com</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-2">Direct Concierge</span>
+                            <a href="tel:+919453540874" class="hover:text-gold transition-colors">+91 94535 40874</a>
+                            <a href="tel:+919118046916" class="hover:text-gold transition-colors mt-1">+91 91180 46916</a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-2">Quick Chat</span>
+                            <a href="https://wa.me/919453540874?text=Hi%20Divyanshi%2C%20I%27d%20like%20to%20inquire%20about%20a%20booking." target="_blank" rel="noopener" class="hover:text-gold transition-colors flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
+                            </a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-2">Studio Base</span>
+                            <span class="text-smoke">Bahraich | Works Globally</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Minimalist Form -->
+                <div class="bg-obsidian p-8 md:p-14 shadow-2xl border border-charcoal relative reveal">
+                    <!-- Corner Accents -->
+                    <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-gold/50"></div>
+                    <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-gold/50"></div>
+                    <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-gold/50"></div>
+                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-gold/50"></div>
+                    
+                    <form id="booking-form" onsubmit="handleBooking(event)">
+                        <div class="space-y-10">
+                            <div class="relative">
+                                <input type="text" id="name" required class="w-full bg-transparent border-b border-smoke/30 px-0 py-3 text-pearl focus:outline-none focus:border-gold transition-colors peer placeholder-transparent" placeholder="Name">
+                                <label for="name" class="absolute left-0 -top-3.5 text-[0.65rem] uppercase tracking-[0.2em] text-smoke transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[0.65rem] peer-focus:text-gold">Full Name / Representation</label>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div class="relative">
+                                    <input type="tel" id="phone" required class="w-full bg-transparent border-b border-smoke/30 px-0 py-3 text-pearl focus:outline-none focus:border-gold transition-colors peer placeholder-transparent" placeholder="Phone">
+                                    <label for="phone" class="absolute left-0 -top-3.5 text-[0.65rem] uppercase tracking-[0.2em] text-smoke transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[0.65rem] peer-focus:text-gold">Contact Number</label>
+                                </div>
+                                <div class="relative">
+                                    <input type="date" id="date" required class="w-full bg-transparent border-b border-smoke/30 px-0 py-3 text-pearl focus:outline-none focus:border-gold transition-colors peer [color-scheme:dark]">
+                                    <label for="date" class="absolute left-0 -top-3.5 text-[0.65rem] uppercase tracking-[0.2em] text-smoke">Event Date</label>
+                                </div>
+                            </div>
+                            
+                            <div class="relative">
+                                <select id="service" required class="w-full bg-transparent border-b border-smoke/30 px-0 py-3 text-pearl focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                                    <option value="" disabled selected class="bg-obsidian">Select Category</option>
+                                    <option value="Red Carpet" class="bg-obsidian">Red Carpet / Appearance</option>
+                                    <option value="Bridal" class="bg-obsidian">Haute Couture Bridal</option>
+                                    <option value="Editorial" class="bg-obsidian">Editorial / Commercial</option>
+                                </select>
+                                <label for="service" class="absolute left-0 -top-3.5 text-[0.65rem] uppercase tracking-[0.2em] text-smoke">Inquiry Type</label>
+                                <i class="fa-solid fa-chevron-down absolute right-0 top-4 text-smoke text-xs pointer-events-none"></i>
+                            </div>
+
+                            <div class="relative">
+                                <textarea id="message" rows="3" class="w-full bg-transparent border-b border-smoke/30 px-0 py-3 text-pearl focus:outline-none focus:border-gold transition-colors resize-none peer placeholder-transparent" placeholder="Details"></textarea>
+                                <label for="message" class="absolute left-0 -top-3.5 text-[0.65rem] uppercase tracking-[0.2em] text-smoke transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[0.65rem] peer-focus:text-gold">Event Details & Location</label>
+                            </div>
+                            
+                            <button type="submit" class="btn-gold-fill w-full border border-gold text-gold py-4 uppercase tracking-[0.3em] text-[0.7rem] hover:text-obsidian transition-colors duration-500 mt-6">
+                                Submit Inquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Elegance Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-obsidian bg-opacity-90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="bg-charcoal border border-gold/20 p-12 max-w-lg w-full mx-4 shadow-2xl relative transform scale-95 transition-transform duration-500" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-smoke hover:text-gold transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center">
+                <span class="font-serif text-5xl text-gold italic mb-6 block">Thank You</span>
+                <p class="text-smoke font-light text-sm leading-relaxed mb-10">
+                    Your inquiry has been received by our concierge team. We will review your event details and respond regarding Divyanshi's availability within 48 hours.
+                </p>
+                <button onclick="closeModal()" class="border-b border-gold text-gold pb-1 uppercase tracking-[0.2em] text-[0.65rem] hover:text-pearl hover:border-pearl transition-all duration-300">
+                    Return to Site
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for Portfolio -->
+    <div id="lightbox" class="fixed inset-0 z-[100] flex items-center justify-center bg-obsidian bg-opacity-95 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 md:top-10 md:right-10 text-pearl hover:text-gold transition-colors z-10">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+        <button onclick="navLightbox(-1)" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-pearl hover:text-gold transition-colors z-10">
+            <i class="fa-solid fa-chevron-left text-2xl"></i>
+        </button>
+        <button onclick="navLightbox(1)" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-pearl hover:text-gold transition-colors z-10">
+            <i class="fa-solid fa-chevron-right text-2xl"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Portfolio enlarged view" class="transform scale-95 transition-transform duration-500">
+    </div>
+    <footer class="bg-obsidian text-smoke pt-24 pb-12 border-t border-charcoal">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16 border-b border-charcoal">
+                <!-- Brand -->
+                <div class="md:col-span-1">
+                    <span class="font-serif text-3xl font-light tracking-[0.3em] text-pearl mb-2 block">DIVYANSHI</span>
+                    <span class="text-[0.55rem] uppercase tracking-[0.4em] text-gold mb-6 block">Global Beauty</span>
+                    <div class="flex space-x-6 mt-4">
+                        <a href="#" class="text-smoke hover:text-gold transition-colors text-sm"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-smoke hover:text-gold transition-colors text-sm"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#" class="text-smoke hover:text-gold transition-colors text-sm"><i class="fa-brands fa-vimeo-v"></i></a>
+                    </div>
+                </div>
+
+                <!-- Explore -->
+                <div>
+                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-6 block">Explore</span>
+                    <ul class="space-y-3 text-sm font-light">
+                        <li><a href="#about" class="hover:text-pearl transition-colors">The Artist</a></li>
+                        <li><a href="#services" class="hover:text-pearl transition-colors">Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-pearl transition-colors">Portfolio</a></li>
+                        <li><a href="#reviews" class="hover:text-pearl transition-colors">Client Reviews</a></li>
+                        <li><a href="#faq" class="hover:text-pearl transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-6 block">Connect</span>
+                    <ul class="space-y-3 text-sm font-light">
+                        <li><a href="mailto:press@divyanshimakeover.com" class="hover:text-pearl transition-colors">press@divyanshimakeover.com</a></li>
+                        <li><a href="tel:+919453540874" class="hover:text-pearl transition-colors">+91 94535 40874</a></li>
+                        <li><a href="tel:+919118046916" class="hover:text-pearl transition-colors">+91 91180 46916</a></li>
+                        <li><a href="#inquire" class="hover:text-pearl transition-colors">Request a Consultation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold mb-6 block">The Inner Circle</span>
+                    <p class="text-sm font-light leading-relaxed mb-5">Occasional notes on bridal trends, availability, and limited trial-session openings.</p>
+                    <form class="flex border-b border-smoke/30 focus-within:border-gold transition-colors" onsubmit="handleNewsletter(event)">
+                        <input type="email" required placeholder="Your email" class="bg-transparent flex-1 py-2 text-sm text-pearl placeholder-smoke focus:outline-none">
+                        <button type="submit" class="text-gold text-xs uppercase tracking-[0.2em] px-2 hover:text-pearl transition-colors">Join</button>
+                    </form>
+                    <p id="newsletter-msg" class="text-[0.65rem] text-gold mt-3 opacity-0 transition-opacity duration-500">Thank you — you're on the list.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[0.65rem] uppercase tracking-[0.2em] font-light pt-10">
+                <p>&copy; <span id="copy-year">2026</span> Divyanshi Studios. All Rights Reserved.</p>
+                    <a href="https://admin.YOURDOMAIN.com" target="_blank" rel="noopener" style="color:#1a1a1a; font-size:0.5rem; letter-spacing:0.15em; text-decoration:none; transition:color 0.3s;" onmouseover="this.style.color='#444'" onmouseout="this.style.color='#1a1a1a'">ADMIN</a>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hover:text-pearl transition-colors">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-pearl transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>

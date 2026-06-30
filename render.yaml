@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: divyanshi-api
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: PORT
+        value: 5000
+
+  - type: web
+    name: divyanshi-client
+    env: static
+    rootDir: client
+    staticPublishPath: .
+    buildCommand: echo "Static site — no build step required"
+    routes:
+      - type: rewrite
+        source: /
+        destination: /pages/index.html
+
+  - type: web
+    name: divyanshi-admin
+    env: static
+    rootDir: admin
+    staticPublishPath: .
+    buildCommand: echo "Static site — no build step required"
+    headers:
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+    routes:
+      - type: rewrite
+        source: /
+        destination: /pages/index.html
